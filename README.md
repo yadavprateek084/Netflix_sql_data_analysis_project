@@ -1,24 +1,29 @@
-Netflix SQL Data Analysis Project 🎬
-Overview
+# Netflix SQL Data Analysis Project 🎬
 
-This project showcases advanced SQL analysis performed on the Netflix dataset using PostgreSQL.
+## Overview
+
+This project demonstrates advanced SQL analysis performed on the Netflix dataset using PostgreSQL.
 
 The main objective of this project is to solve real-world business problems using advanced SQL concepts such as:
 
-Common Table Expressions (CTEs)
-Window Functions
-String Manipulation
-Data Cleaning
-Aggregation
-Analytical Queries
+- Common Table Expressions (CTEs)
+- Window Functions
+- String Manipulation
+- Aggregation
+- Data Cleaning
+- Analytical Queries
 
-This project is highly useful for:
+This project is useful for:
+- Data Analyst Interview Preparation
+- SQL Practice
+- PostgreSQL Learning
+- MIS Analyst Roles
 
-Data Analyst Interview Preparation
-SQL Practice
-MIS Analyst Roles
-PostgreSQL Learning
-Database Schema
+---
+
+# Database Schema
+
+```sql
 CREATE TABLE netflix 
 (
     show_id        VARCHAR(10),
@@ -34,17 +39,24 @@ CREATE TABLE netflix
     listed_in      VARCHAR(100),
     description    VARCHAR(250)
 );
-Advanced SQL Queries
-1. Most Common Rating for Movies and TV Shows
-Problem
+```
 
+---
+
+# Advanced SQL Queries
+
+## 1. Most Common Rating for Movies and TV Shows
+
+### Problem
 Find the most frequently used rating for each content type.
 
-SQL Concepts Used
-CTE
-Window Functions
-ROW_NUMBER()
-Aggregation
+### Concepts Used
+- CTE
+- Window Functions
+- ROW_NUMBER()
+- Aggregation
+
+```sql
 WITH rating_detail AS (
     SELECT 
         format,
@@ -61,15 +73,21 @@ WITH rating_detail AS (
 SELECT *
 FROM rating_detail
 WHERE ranking = 1;
-2. Genre-Based Content Analysis
-Problem
+```
 
-Count how much content belongs to each genre.
+---
 
-SQL Concepts Used
-STRING_TO_ARRAY()
-UNNEST()
-Aggregation
+## 2. Genre-Based Content Analysis
+
+### Problem
+Count total content available in each genre.
+
+### Concepts Used
+- STRING_TO_ARRAY()
+- UNNEST()
+- Aggregation
+
+```sql
 WITH new_data AS (
     SELECT 
         UNNEST(
@@ -84,16 +102,22 @@ SELECT
 FROM new_data
 GROUP BY genre_name
 ORDER BY total_content DESC;
-3. Top 10 Actors in Indian Netflix Movies
-Problem
+```
 
-Find actors who appeared in the highest number of Indian Netflix movies.
+---
 
-SQL Concepts Used
-CTE
-String Manipulation
-Aggregation
-Filtering
+## 3. Top 10 Actors in Indian Netflix Movies
+
+### Problem
+Find actors with the highest appearances in Indian Netflix movies.
+
+### Concepts Used
+- CTE
+- String Manipulation
+- Aggregation
+- Filtering
+
+```sql
 WITH new_data AS (
     SELECT 
         TRIM(
@@ -115,15 +139,21 @@ AND country ILIKE '%India%'
 GROUP BY actor_name
 ORDER BY movie_count DESC
 LIMIT 10;
-4. Content Categorization using CASE Statement
-Problem
+```
 
+---
+
+## 4. Content Categorization using CASE Statement
+
+### Problem
 Categorize content as 'Good' or 'Bad' based on keywords in the description.
 
-SQL Concepts Used
-CASE Statement
-Pattern Matching
-Aggregation
+### Concepts Used
+- CASE Statement
+- Pattern Matching
+- Aggregation
+
+```sql
 WITH categorized_content AS (
     SELECT 
         CASE 
@@ -140,35 +170,63 @@ SELECT
     COUNT(*) AS total_content
 FROM categorized_content
 GROUP BY category;
-SQL File
+```
+
+---
+
+# SQL File
 
 All queries are included in:
 
+```bash
 netflix_analysis.sql
-Advanced SQL Concepts Covered
-Concept	Usage
-CTEs	Query Structuring
-Window Functions	Ranking & Analytics
-ROW_NUMBER()	Ranking Results
-STRING_TO_ARRAY()	Splitting Values
-UNNEST()	Array Expansion
-CASE Statement	Conditional Logic
-Aggregation	Data Analysis
-Pattern Matching	Text Filtering
-Tech Stack
-PostgreSQL
-SQL
-Netflix Dataset (CSV)
-Key Learnings
+```
+
+---
+
+# Advanced SQL Concepts Covered
+
+| Concept | Usage |
+|----------|--------|
+| CTEs | Query Structuring |
+| Window Functions | Ranking & Analytics |
+| ROW_NUMBER() | Ranking Results |
+| STRING_TO_ARRAY() | Splitting Values |
+| UNNEST() | Array Expansion |
+| CASE Statement | Conditional Logic |
+| Aggregation | Data Analysis |
+| Pattern Matching | Text Filtering |
+
+---
+
+# Tech Stack
+
+- PostgreSQL
+- SQL
+- Netflix Dataset (CSV)
+
+---
+
+# Key Learnings
 
 Through this project, I improved my understanding of:
 
-Writing analytical SQL queries
-Handling real-world datasets
-Using PostgreSQL advanced functions
-Performing data cleaning in SQL
-Solving interview-level SQL problems
-Author
-Prateek Yadav
+- Writing analytical SQL queries
+- Handling real-world datasets
+- Using PostgreSQL advanced functions
+- Performing data cleaning in SQL
+- Solving interview-level SQL problems
 
-Aspiring Data Analyst | SQL Enthusiast |
+---
+
+# Author
+
+## Prateek Yadav
+
+Aspiring Data Analyst | SQL Enthusiast | CSE Student
+
+---
+
+# Support
+
+If you liked this project, consider giving it a ⭐ on GitHub.
