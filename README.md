@@ -17,7 +17,6 @@ This project is useful for:
 - Data Analyst Interview Preparation
 - SQL Practice
 - PostgreSQL Learning
-- MIS Analyst Roles
 
 ---
 
@@ -43,7 +42,7 @@ CREATE TABLE netflix
 
 ---
 
-# Advanced SQL Queries
+# Some SQL Queries
 
 ## 1. Most Common Rating for Movies and TV Shows
 
@@ -223,10 +222,5 @@ Through this project, I improved my understanding of:
 
 ## Prateek Yadav
 
-Aspiring Data Analyst | SQL Enthusiast | CSE Student
-
----
-
-# Support
 
 If you liked this project, consider giving it a ⭐ on GitHub.
