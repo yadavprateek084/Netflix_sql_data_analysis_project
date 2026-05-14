@@ -1,33 +1,24 @@
-🎬 Netflix SQL Data Analysis Project
-<div align="center">
+Netflix SQL Data Analysis Project 🎬
+Overview
 
+This project showcases advanced SQL analysis performed on the Netflix dataset using PostgreSQL.
 
-
-
-
-
-Advanced SQL Analytics using PostgreSQL
-</div>
-📌 Project Overview
-
-This project focuses on solving advanced business problems using SQL on the Netflix dataset.
-
-The analysis demonstrates practical usage of:
+The main objective of this project is to solve real-world business problems using advanced SQL concepts such as:
 
 Common Table Expressions (CTEs)
 Window Functions
 String Manipulation
-Aggregation Techniques
 Data Cleaning
+Aggregation
 Analytical Queries
 
-The project is designed to strengthen real-world SQL problem-solving skills commonly used in:
+This project is highly useful for:
 
-Data Analyst Roles
-MIS Analyst Interviews
-Business Intelligence Projects
-SQL Assessments
-🏗 Database Schema
+Data Analyst Interview Preparation
+SQL Practice
+MIS Analyst Roles
+PostgreSQL Learning
+Database Schema
 CREATE TABLE netflix 
 (
     show_id        VARCHAR(10),
@@ -43,13 +34,13 @@ CREATE TABLE netflix
     listed_in      VARCHAR(100),
     description    VARCHAR(250)
 );
-🚀 Top 4 Advanced SQL Queries
-1️⃣ Most Common Rating for Movies & TV Shows
-📌 Objective
+Advanced SQL Queries
+1. Most Common Rating for Movies and TV Shows
+Problem
 
 Find the most frequently used rating for each content type.
 
-🔍 Concepts Used
+SQL Concepts Used
 CTE
 Window Functions
 ROW_NUMBER()
@@ -58,7 +49,7 @@ WITH rating_detail AS (
     SELECT 
         format,
         rating,
-        COUNT(*) AS countings,
+        COUNT(*) AS total_count,
         ROW_NUMBER() OVER(
             PARTITION BY format
             ORDER BY COUNT(*) DESC
@@ -70,117 +61,114 @@ WITH rating_detail AS (
 SELECT *
 FROM rating_detail
 WHERE ranking = 1;
-2️⃣ Genre-Based Content Analysis
-📌 Objective
+2. Genre-Based Content Analysis
+Problem
 
-Analyze total content available across genres.
+Count how much content belongs to each genre.
 
-🔍 Concepts Used
+SQL Concepts Used
 STRING_TO_ARRAY()
 UNNEST()
 Aggregation
 WITH new_data AS (
-    SELECT *,
-           UNNEST(
-               STRING_TO_ARRAY(listed_in, ',')
-           ) AS new_genre
+    SELECT 
+        UNNEST(
+            STRING_TO_ARRAY(listed_in, ',')
+        ) AS genre
     FROM netflix
 )
 
 SELECT 
-    new_genre,
-    COUNT(*) AS counter
+    TRIM(genre) AS genre_name,
+    COUNT(*) AS total_content
 FROM new_data
-GROUP BY 1
-ORDER BY 2 DESC;
-3️⃣ Top 10 Actors in Indian Netflix Movies
-📌 Objective
+GROUP BY genre_name
+ORDER BY total_content DESC;
+3. Top 10 Actors in Indian Netflix Movies
+Problem
 
-Find actors with the highest appearances in Indian Netflix movies.
+Find actors who appeared in the highest number of Indian Netflix movies.
 
-🔍 Concepts Used
+SQL Concepts Used
 CTE
-String Cleaning
+String Manipulation
 Aggregation
-Pattern Matching
+Filtering
 WITH new_data AS (
-    SELECT *,
-           TRIM(
-               UNNEST(
-                   STRING_TO_ARRAY(casts, ',')
-               )
-           ) AS new_casts
+    SELECT 
+        TRIM(
+            UNNEST(
+                STRING_TO_ARRAY(casts, ',')
+            )
+        ) AS actor_name,
+        country
     FROM netflix
     WHERE format = 'Movie'
 )
 
 SELECT 
-    new_casts,
-    COUNT(*) AS counter
+    actor_name,
+    COUNT(*) AS movie_count
 FROM new_data
-WHERE new_casts IS NOT NULL
+WHERE actor_name IS NOT NULL
 AND country ILIKE '%India%'
-GROUP BY 1
-ORDER BY 2 DESC
+GROUP BY actor_name
+ORDER BY movie_count DESC
 LIMIT 10;
-4️⃣ Content Categorization using CASE Statements
-📌 Objective
+4. Content Categorization using CASE Statement
+Problem
 
-Categorize content as Good or Bad based on keywords.
+Categorize content as 'Good' or 'Bad' based on keywords in the description.
 
-🔍 Concepts Used
+SQL Concepts Used
 CASE Statement
 Pattern Matching
-Conditional Logic
 Aggregation
-WITH new_data AS (
-    SELECT *,
-           CASE
-               WHEN description ILIKE '%kill%'
-                 OR description ILIKE '%violence%'
-               THEN 'Bad'
-               ELSE 'Good'
-           END AS category
+WITH categorized_content AS (
+    SELECT 
+        CASE 
+            WHEN description ILIKE '%kill%'
+              OR description ILIKE '%violence%'
+            THEN 'Bad'
+            ELSE 'Good'
+        END AS category
     FROM netflix
 )
 
 SELECT 
     category,
-    COUNT(*)
-FROM new_data
-GROUP BY 1;
-📂 SQL File Included
+    COUNT(*) AS total_content
+FROM categorized_content
+GROUP BY category;
+SQL File
 
-The project also contains a dedicated SQL file with all queries:
+All queries are included in:
 
 netflix_analysis.sql
-
-This file includes:
-
-Database Schema
-Data Analysis Queries
-Advanced SQL Problems
-PostgreSQL Functions & Techniques
-🧠 Advanced SQL Concepts Covered
-Concept	Purpose
+Advanced SQL Concepts Covered
+Concept	Usage
 CTEs	Query Structuring
 Window Functions	Ranking & Analytics
 ROW_NUMBER()	Ranking Results
+STRING_TO_ARRAY()	Splitting Values
 UNNEST()	Array Expansion
-STRING_TO_ARRAY()	String Splitting
-CASE Statements	Conditional Logic
-Aggregation	Data Summarization
-Pattern Matching	Text Analysis
-🛠 Tech Stack
-Technology	Usage
-PostgreSQL	Database
-SQL	Data Analysis
-Netflix Dataset	Data Source
-📈 Key Learnings
-Solving real-world analytical SQL problems
-Working with messy datasets
+CASE Statement	Conditional Logic
+Aggregation	Data Analysis
+Pattern Matching	Text Filtering
+Tech Stack
+PostgreSQL
+SQL
+Netflix Dataset (CSV)
+Key Learnings
+
+Through this project, I improved my understanding of:
+
+Writing analytical SQL queries
+Handling real-world datasets
 Using PostgreSQL advanced functions
-Performing business-driven data analysis
-Writing optimized SQL queries
-👨‍💻 Author
+Performing data cleaning in SQL
+Solving interview-level SQL problems
+Author
 Prateek Yadav
+
+Aspiring Data Analyst | SQL Enthusiast |
